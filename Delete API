@@ -1,0 +1,18 @@
+[HttpDelete]
+        public IHttpActionResult DeleteAlbum(int id)
+        {
+            Album album = (from m in entities.Albums where m.AlbumID == id select m).FirstOrDefault();
+            if (album == null)
+                return NotFound();
+            entities.Albums.Remove(album);
+            try
+            {
+                entities.SaveChanges();
+                
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return Ok();
+        }
